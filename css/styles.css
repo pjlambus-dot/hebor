@@ -1,0 +1,161 @@
+/* Custom Font Setup for TD Sulog (.woff2) */
+@font-face {
+    font-family: 'td sulog';
+    src: url('https://font-public.canva.com/YAFXLpM1Ank/0/TD_Sulog.4c9fd26fc8e9ab35dde1602daf06e84.665ae13efbcac675916db53cba221461.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif, Georgia, serif;
+    background-color: #000000;
+    color: #ffffff;
+    margin: 0;
+}
+
+/* TD Sulog font for Titles, Buttons, Navbar Links, at Copyright Hebor */
+.navbar-brand,
+.navbar-brand span, 
+.logo-text,
+h1, h2, h3, h4, h5, h6,
+.product-title,
+.item-title,
+.copyright-brand {
+    font-family: 'td sulog', Georgia, serif !important;
+    letter-spacing: 1px;
+}
+
+.nav-link,
+.btn,
+button,
+input, textarea, select,
+.empty-message,
+.privacy-policy-btn,
+.footer-text,
+p, span, small {
+    font-family: 'Montserrat', sans-serif !important;
+}
+
+/* for Copyright part */
+.copyright-text {
+    font-family: 'Montserrat', sans-serif;
+}
+.copyright-text .hebor-font {
+    font-family: 'td sulog', Georgia, serif !important;
+}
+
+/* --- PERFECT CENTER NAVBAR LOGO FIX --- */
+.navbar .container-fluid {
+    position: relative;
+    height: 120px;
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    margin: 0 !important;
+}
+
+.navbar-nav, 
+.navbar .d-flex.align-items-center.gap-2 {
+    z-index: 2;
+}
+
+/* General Navbar Logo Size */
+.navbar-brand img {
+    max-height: none !important;
+    height: 120px; 
+    width: auto;
+}
+
+.hero-section {
+    border-bottom: 5px solid #f39c12;
+}
+
+/* Product Page Size Pill Buttons Styling */
+.size-pill {
+    background-color: #ffffff;
+    color: #495057;
+    border: 1.5px solid #f5b041 !important;
+    font-size: 11px;
+    letter-spacing: 1px;
+    transition: all 0.2s ease;
+}
+.size-pill:hover, .size-pill.active {
+    background-color: #f39c12 !important;
+    color: #ffffff !important;
+    border-color: #f39c12 !important;
+}
+
+@media (max-width: 991.98px) {
+
+    .navbar .container-fluid {
+        flex-direction: column !important;
+        align-items: center !important;
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+
+    .navbar-brand {
+        position: static !important;
+        transform: none !important;
+        margin: 10px 0 !important;
+        order: 1;
+    }
+
+    /* Ayusin ang nav links sa itaas */
+    .navbar-nav {
+        flex-direction: row !important;
+        justify-content: center !important;
+        gap: 15px !important;
+        margin: 5px 0 !important;
+        width: 100%;
+        order: 2;
+    }
+
+    .navbar .d-flex.align-items-center.gap-2 {
+        justify-content: center !important;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: 8px 0 5px 0 !important;
+        order: 3;
+    }
+
+    .navbar .d-flex.align-items-center.gap-2 .btn {
+        padding: 6px 12px !important;
+        font-size: 10px !important;
+    }
+}
+
+@media (max-width: 767.98px) {
+    h1.display-3, h1.display-4, h1.display-5 {
+        font-size: 2rem !important;
+    }
+
+    #shoppingbagItemsContainer .row {
+        flex-direction: column !important;
+        text-align: center;
+        gap: 15px;
+    }
+
+    #shoppingbagItemsContainer .col-6,
+    #shoppingbagItemsContainer .col-4,
+    #shoppingbagItemsContainer .col-2 {
+        width: 100% !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #shoppingbagItemsContainer .d-flex.align-items-center.gap-3 {
+        flex-direction: column !important;
+        text-align: center;
+    }
+
+    main .row.g-5 {
+        --bs-gutter-y: 1.5rem;
+    }
+}

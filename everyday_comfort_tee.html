@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hebor - Everyday Comfort tee</title>
+    <!-- Bootstrap 5 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-black text-white d-flex flex-column min-vh-100">
+
+      <!-- Top Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-dark bg-black py-3 border-bottom border-secondary position-relative">
+        <div class="container-fluid px-4">
+            <!-- Left Links -->
+            <ul class="navbar-nav me-auto flex-row gap-4">
+                <li class="nav-item"><a class="nav-link text-white text-uppercase fs-6" href="store.html">Store</a></li>
+                <li class="nav-item"><a class="nav-link text-white text-uppercase fs-6" href="about_us.html">About us</a></li>
+                <li class="nav-item"><a class="nav-link text-white text-uppercase fs-6" href="contact_us.html">Contact us</a></li>
+            </ul>
+
+            <!-- Center Brand Logo  -->
+            <a class="navbar-brand text-center d-flex flex-column align-items-center" href="index.html">
+                <img src="Hebor logo (white).png" alt="hebor logo" class="mb-1">
+            </a>
+
+            <!-- Right Action Pill Buttons (Search, Shopping Bag, Likes) -->
+            <div class="d-flex align-items-center gap-2 ms-auto">
+                <!-- Search Pill Button -->
+                <a href="store.html" class="btn rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2 fw-bold text-uppercase shadow-sm fs-6" style="background-color: #ffffff; color: #b5b5b5; letter-spacing: 1px; border: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#f39c12" viewBox="0 0 16 16">
+                        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                    </svg>
+                    <span>SEARCH</span>
+                </a>
+
+                <!-- Shopping Bag Pill Button -->
+                <a href="shopping_bag.html" class="btn rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2 fw-bold text-uppercase shadow-sm fs-6" style="background-color: #f39c12; color: #ffffff; letter-spacing: 1px; border: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4zM2 5h12v9H2z"/>
+                    </svg>
+                    <span>SHOPPING BAG</span>
+                </a>
+
+                <!-- Likes Pill Button -->
+                <a href="likes.html" class="btn rounded-pill px-4 py-2 d-inline-flex align-items-center gap-2 fw-bold text-uppercase shadow-sm fs-6" style="background-color: #f39c12; color: #ffffff; letter-spacing: 1px; border: none;">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#ffffff" viewBox="0 0 16 16">
+                        <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.27-3.04 7.8 3.243q.09.021.198.043c.106-.022.137-.021.198-.065C12.73-3.04 23.333 4.868 8 15"/>
+                    </svg>
+                    <span>LIKES</span>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main White Content Section -->
+    <main class="bg-white text-dark py-5 flex-grow-1 d-flex align-items-center">
+        <div class="container py-3">
+            <div class="row g-5 align-items-center justify-content-center">
+                
+                <!-- Left Column: Gray Product Image Box with Heart Icon -->
+                <div class="col-md-6">
+                    <div class="p-4 position-relative d-flex align-items-center justify-content-center" style="background-color: #a9a9a9; min-height: 430px;">
+                        <button type="button" class="btn p-2 border-0 bg-transparent position-absolute bottom-0 start-0 m-3 like-btn" 
+                                data-name="Everyday Comfort tee" data-size="M" data-price="750" data-image="images/everyday-comfort-tee.png" title="Add to Likes">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="#f39c12" class="heart-icon" viewBox="0 0 16 16">
+                                <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.27-3.04 7.8 3.243q.09.021.198.043c.106-.022.137-.021.198-.065C12.73-3.04 23.333 4.868 8 15"/>
+                            </svg>
+                        </button>
+                        <img src="Everyday Comfort tee.png" alt="Everyday Comfort tee.png" class="img-fluid" style="max-height: 360px; object-fit: contain;">
+                    </div>
+                </div>
+
+                <!-- Right Column: Product Details -->
+                <div class="col-md-5">
+                    <h1 class="display-5 fw-bold mb-2" style="color: #8c5843;">
+                        Everyday Comfort tee
+                    </h1>
+                    <p class="text-secondary mb-3" style="line-height: 1.5; font-size: 13px;">
+                        The shirt for you.
+                    </p>
+
+                    <!-- Price Display -->
+                    <div class="fw-bold fs-4 text-dark mb-4">
+                        PHP 750
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-center fw-bold text-dark py-1 mb-3 text-uppercase" style="background-color: #f5b041; font-size: 13px; letter-spacing: 1px;">
+                            SIZE
+                        </div>
+                        <div class="d-flex justify-content-between gap-2">
+                            <button type="button" class="btn rounded-pill flex-fill py-1 fw-semibold size-pill" data-size="SMALL">SMALL</button>
+                            <button type="button" class="btn rounded-pill flex-fill py-1 fw-semibold size-pill active" data-size="MEDIUM">MEDIUM</button>
+                            <button type="button" class="btn rounded-pill flex-fill py-1 fw-semibold size-pill" data-size="LARGE">LARGE</button>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <div class="text-center fw-bold text-dark py-1 mb-2 text-uppercase" style="background-color: #f5b041; font-size: 13px; letter-spacing: 1px;">
+                            QUANTITY
+                        </div>
+                        <div class="d-flex align-items-center justify-content-between px-4 py-1 border-bottom" style="border-color: #dee2e6 !important;">
+                            <!-- QUANTITY BUTTONS PART -->
+                            <button type="button" id="qtyMinus" class="btn btn-link text-dark text-decoration-none fs-4 fw-bold p-0 shadow-none">&minus;</button>
+                            <span id="qtyDisplay" class="fw-bold fs-5 text-dark">1</span>
+                            <button type="button" id="qtyPlus" class="btn btn-link text-dark text-decoration-none fs-4 fw-bold p-0 shadow-none">&plus;</button>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-3 mt-4">
+                        <!--  BUY NOW BUTTON PART -->
+                        <button type="button"
+                                id="buyNowBtn"
+                                class="btn rounded-pill py-2 fw-bold text-dark text-uppercase text-center shadow-sm"
+                                style="background-color: #f5b041; font-size: 14px; letter-spacing: 1px; border: none;">
+                            BUY NOW
+                        </button>
+ 
+                        <button type="button" id="addToBagBtn" class="btn rounded-pill py-2 fw-bold text-dark text-uppercase bg-white shadow-sm" style="border: 1.5px solid #f5b041 !important; font-size: 14px; letter-spacing: 1px;">
+                            ADD TO BAG
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Yellow Section -->
+    <section class="py-4 text-center mt-auto" style="background-color: #f39c12;">
+        <div class="container">
+            <a href="privacy_policy.html" class="btn btn-dark rounded-pill px-4 py-2 text-white fw-semibold mb-2 shadow-sm" style="font-size: 12px; letter-spacing: 1px;">
+                PRIVACY POLICY
+            </a>
+           <div class="text-dark small fw-medium mt-1 copyright-text">
+    &copy; 2026 <span class="hebor-font">hebor</span>. All rights reserved.
+</div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
