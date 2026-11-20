@@ -426,9 +426,11 @@ document.addEventListener('DOMContentLoaded', function () {
     // ==========================================
     // 9. LITERAL SITE-WIDE SEARCH BAR (NO HTML FILENAMES)
     // ==========================================
-    const hasSearchButtonInNav = document.querySelector('nav a[href="store.html"]');
+    const navSearchBtn = Array.from(document.querySelectorAll('nav a[href="store.html"]')).find((el) =>
+        el.textContent.toUpperCase().includes('SEARCH')
+    );
 
-    if (hasSearchButtonInNav) {
+    if (navSearchBtn) {
         const searchModal = document.createElement('div');
         searchModal.id = 'heborSearchModal';
         searchModal.setAttribute('role', 'dialog');
@@ -615,9 +617,10 @@ document.addEventListener('DOMContentLoaded', function () {
             searchModal.classList.remove('active');
         }
 
+        // SEARCH button lang ang hahawakan; hindi gagalawin ang Store nav link
         document.addEventListener('click', function (e) {
-            const clickedSearchLink = e.target.closest('nav a[href="store.html"]');
-            if (clickedSearchLink) {
+            const clickedLink = e.target.closest('nav a[href="store.html"]');
+            if (clickedLink && clickedLink.textContent.toUpperCase().includes('SEARCH')) {
                 e.preventDefault();
                 e.stopPropagation();
                 if (typeof e.stopImmediatePropagation === 'function') {
@@ -645,5 +648,5 @@ document.addEventListener('DOMContentLoaded', function () {
             renderSearchResults(this.value);
         });
     }
-
+    
 });
