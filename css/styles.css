@@ -321,16 +321,25 @@ nav a[href="store.html"][class*="btn"] span {
 }
 
 nav a[href="shopping_bag.html"][class*="btn"],
-nav a[href="shopping_bag.html"][class*="btn"] span,
-nav a[href="likes.html"][class*="btn"],
-nav a[href="likes.html"][class*="btn"] span {
-    color: #111111 !important;
+nav a[href="likes.html"][class*="btn"] {
+    background-color: #8f5400 !important;
+    color: #ffffff !important;
     text-shadow: none !important;
 }
 
+nav a[href="shopping_bag.html"][class*="btn"] span,
+nav a[href="likes.html"][class*="btn"] span {
+    color: #ffffff !important;
+}
+
+nav a[href="shopping_bag.html"][class*="btn"] svg,
+nav a[href="likes.html"][class*="btn"] svg {
+    fill: #ffffff !important;
+}
+
 .hebor-search-badge {
-    background: #f39c12 !important;
-    color: #111111 !important;
+    background: #8f5400 !important;
+    color: #ffffff !important;
 }
 
 .hebor-search-title {
@@ -353,9 +362,9 @@ main small,
 
 .size-pill:hover,
 .size-pill.active {
-    background-color: #f39c12 !important;
-    color: #111111 !important;
-    border-color: #111111 !important;
+    background-color: #8f5400 !important;
+    color: #ffffff !important;
+    border-color: #8f5400 !important;
 }
 
 .size-pill:focus-visible,
