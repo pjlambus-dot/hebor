@@ -424,9 +424,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
     
-    // ==========================================
-    // 9. LITERAL SITE-WIDE SEARCH BAR
-    // ==========================================
     const hasSearchButtonInNav = document.querySelector('nav a[href="store.html"]');
 
     if (hasSearchButtonInNav) {
@@ -458,72 +455,84 @@ document.addEventListener('DOMContentLoaded', function () {
                     page: 'Home',
                     title: 'Welcome to Hebor',
                     url: 'index.html',
+                    summary: 'Home showcase, brand emblem, and store access.',
                     keywords: 'home welcome hebor emblem shop now store carousel'
                 },
                 {
                     page: 'Store',
                     title: "Don't Be Late Tee (PHP 500)",
                     url: 'don_t_be_late_tee.html',
+                    summary: 'Because Time is Gold. Available in Small, Medium, and Large.',
                     keywords: "store shirt tee don't be late because time is gold php 500 small medium large"
                 },
                 {
                     page: 'Store',
                     title: 'Everyday Comfort tee (PHP 750)',
                     url: 'everyday_comfort_tee.html',
+                    summary: 'The shirt for you. Available in Small, Medium, and Large.',
                     keywords: 'store shirt tee everyday comfort the shirt for you php 750 small medium large'
                 },
                 {
                     page: 'Store',
                     title: 'Do Good Work Tee (PHP 500)',
                     url: 'do_good_work_tee.html',
+                    summary: 'Being good is the new trend. Available in Small, Medium, and Large.',
                     keywords: 'store shirt tee do good work being good is the new trend php 500 small medium large'
                 },
                 {
                     page: 'About Us',
                     title: 'History — Hebor in Hagonoy, Bulacan',
                     url: 'about_us.html',
+                    summary: 'Local term from Hagonoy, Bulacan and modern Filipino fashion.',
                     keywords: 'about us history hagonoy bulacan chore gathering errand filipino fashion'
                 },
                 {
                     page: 'About Us',
                     title: 'People Behind Hebor',
                     url: 'about_us.html',
+                    summary: 'Psalm Lambus, Jan Arelle Layug, Nicole Grace Pantin, and Juan Miguel Sotto.',
                     keywords: 'about us people behind hebor psalm lambus jan arelle layug nicole grace pantin juan miguel sotto team'
                 },
                 {
                     page: 'Contact Us',
                     title: 'Contact Us Form & Inquiry',
                     url: 'contact_us.html',
+                    summary: 'Send a message with your full name, email address, and inquiry.',
                     keywords: 'contact us form full name email address message submit inquiry'
                 },
                 {
                     page: 'Privacy Policy',
                     title: '1. Information We Collect',
                     url: 'privacy_policy.html',
+                    summary: 'Full name, email address, order specifications, and messages.',
                     keywords: 'privacy policy information we collect name email order specifications shirt size quantity messages'
                 },
                 {
                     page: 'Privacy Policy',
                     title: '2. How We Use Your Information & Email Transparency',
                     url: 'privacy_policy.html',
+                    summary: 'Order processing, logistics, and full email copies for transparency.',
                     keywords: 'privacy policy how we use information email transparency full email copies logistics'
                 },
                 {
                     page: 'Privacy Policy',
                     title: '3. Data Confidentiality',
                     url: 'privacy_policy.html',
+                    summary: 'Personal data is protected and never sold, traded, or rented.',
                     keywords: 'privacy policy data confidentiality personal data sell trade rent fulfillment'
                 },
                 {
                     page: 'Shopping Bag',
                     title: 'Shopping Bag & Bulk Checkout',
                     url: 'shopping_bag.html',
+                    summary: 'Manage selected items, quantities, subtotal, and checkout.',
                     keywords: 'shopping bag cart quantity subtotal proceed to checkout bulk order'
                 },
                 {
                     page: 'Likes',
                     title: 'Liked Items',
                     url: 'likes.html',
+                    summary: 'View or remove shirts saved to your likes.',
                     keywords: 'likes liked items favorites heart view item remove'
                 }
             ];
@@ -535,6 +544,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         page: 'Likes',
                         title: `Liked: ${item.name}`,
                         url: 'likes.html',
+                        summary: 'Saved in your Likes list.',
                         keywords: `likes liked item ${item.name} ${item.size || ''} php ${item.price || ''}`
                     });
                 }
@@ -547,6 +557,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         page: 'Shopping Bag',
                         title: `In Bag: ${item.name} (${item.size || 'M'}) x${item.quantity || 1}`,
                         url: 'shopping_bag.html',
+                        summary: 'Currently added in your Shopping Bag.',
                         keywords: `shopping bag in bag ${item.name} ${item.size || ''} quantity ${item.quantity || 1}`
                     });
                 }
@@ -560,7 +571,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 <a href="${entry.url}" class="hebor-search-item">
                     <span class="hebor-search-badge">${entry.page}</span>
                     <div class="hebor-search-title">${entry.title}</div>
-                    <p class="hebor-search-snippet">Go to ${entry.url}</p>
+                    <p class="hebor-search-snippet">${entry.summary}</p>
                 </a>
             `).join('');
         }
@@ -577,7 +588,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const terms = trimmed.split(/\s+/).filter(Boolean);
             const matches = index.filter((entry) => {
-                const haystack = `${entry.page} ${entry.title} ${entry.keywords}`.toLowerCase();
+                const haystack = `${entry.page} ${entry.title} ${entry.summary} ${entry.keywords}`.toLowerCase();
                 return terms.every((term) => haystack.includes(term));
             });
 
@@ -632,6 +643,4 @@ document.addEventListener('DOMContentLoaded', function () {
             renderSearchResults(this.value);
         });
     }
-   
-    
 });
