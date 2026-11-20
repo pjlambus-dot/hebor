@@ -134,6 +134,36 @@ document.addEventListener('DOMContentLoaded', function () {
         const checkoutBtn = document.getElementById('checkoutBtn');
         const subtotalDisplay = document.getElementById('subtotalDisplay');
 
+        function getSelectedBagItems() {
+            const shoppingbag = JSON.parse(localStorage.getItem('heborshopping bag')) || [];
+            const checkboxes = document.querySelectorAll('.bag-circle-check');
+            const selected = [];
+
+            checkboxes.forEach((cb) => {
+                if (cb.checked) {
+                    const idx = parseInt(cb.getAttribute('data-index'));
+                    if (shoppingbag[idx]) {
+                        selected.push(shoppingbag[idx]);
+                    }
+                }
+            });
+
+            return selected;
+        }
+
+        function updateCheckedSubtotal() {
+            const selectedItems = getSelectedBagItems();
+            const checkedSubtotal = selectedItems.reduce((sum, item) => {
+                const unitPrice = item.price || 500;
+                const qty = item.quantity || 1;
+                return sum + (unitPrice * qty);
+            }, 0);
+
+            if (subtotalDisplay) {
+                subtotalDisplay.textContent = `Subtotal: PHP ${checkedSubtotal.toLocaleString()}`;
+            }
+        }
+
         function loadshoppingbag() {
             let shoppingbag = JSON.parse(localStorage.getItem('heborshopping bag')) || [];
 
@@ -148,17 +178,15 @@ document.addEventListener('DOMContentLoaded', function () {
             if (checkoutSection) checkoutSection.classList.remove('d-none');
             shoppingbagContainer.innerHTML = '';
 
-            let subtotal = 0;
-
             shoppingbag.forEach((item, index) => {
                 const unitPrice = item.price || 500;
                 const itemTotalPrice = unitPrice * (item.quantity || 1);
-                subtotal += itemTotalPrice;
 
                 const itemRow = document.createElement('div');
                 itemRow.className = 'row align-items-center py-3 border-bottom';
                 itemRow.innerHTML = `
                     <div class="col-6 col-md-6 d-flex align-items-center gap-3 mb-2 mb-md-0">
+                        <input type="checkbox" class="bag-circle-check" data-index="${index}" checked aria-label="Select ${item.name}">
                         <div class="p-2 bg-white rounded border d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; min-width: 70px;">
                             <img src="${item.image || 'Dont be late tee.png'}" alt="${item.name}" class="img-fluid" style="max-height: 60px; object-fit: contain;">
                         </div>
@@ -183,9 +211,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 shoppingbagContainer.appendChild(itemRow);
             });
 
-            if (subtotalDisplay) {
-                subtotalDisplay.textContent = `Subtotal: PHP ${subtotal.toLocaleString()}`;
-            }
+            updateCheckedSubtotal();
+
+            document.querySelectorAll('.bag-circle-check').forEach(cb => {
+                cb.addEventListener('change', updateCheckedSubtotal);
+            });
 
             document.querySelectorAll('.qty-minus-bag').forEach(btn => {
                 btn.addEventListener('click', function () {
@@ -221,27 +251,35 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', function () {
-                let shoppingbag = JSON.parse(localStorage.getItem('heborshopping bag')) || [];
-                if (shoppingbag.length === 0) {
-                    alert("Your shopping bag is empty.");
+                const selectedItems = getSelectedBagItems();
+
+                if (selectedItems.length === 0) {
+                    alert("Paki-tick muna ang kahit isang item na gusto mong i-checkout.");
                     return;
                 }
 
                 const recipient = "order@examplewebsite142.com";
                 const subject = "Bulk Order Checkout: Hebor Shopping Bag";
-                
-                let body = "Hello Hebor,\n\nI would like to place an order for the following items in my shopping bag:\n\n";
-                shoppingbag.forEach((item, i) => {
-                    body += `${i + 1}. Product: ${item.name}\n   - Size: ${item.size}\n   - Quantity: ${item.quantity}\n\n`;
+
+                let totalAmount = 0;
+                let body = "Hello Hebor,\n\nI would like to place an order for the following selected items in my shopping bag:\n\n";
+
+                selectedItems.forEach((item, i) => {
+                    const unitPrice = item.price || 500;
+                    const qty = item.quantity || 1;
+                    const itemTotal = unitPrice * qty;
+                    totalAmount += itemTotal;
+                    body += `${i + 1}. Product: ${item.name}\n   - Size: ${item.size}\n   - Quantity: ${qty}\n   - Total: PHP ${itemTotal.toLocaleString()}\n\n`;
                 });
-                body += "Please let me know the next steps for payment and shipping.\n\nThank you!";
+
+                body += `Selected Subtotal: PHP ${totalAmount.toLocaleString()}\n\nPlease let me know the next steps for payment and shipping.\n\nThank you!`;
 
                 const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(recipient)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 window.open(gmailUrl, '_blank');
             });
         }
     }
-
+    
     // ==========================================
     // 6. LIKES SYSTEM
     // ==========================================
