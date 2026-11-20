@@ -423,6 +423,9 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // ==========================================
+    // 9. LITERAL SITE-WIDE SEARCH BAR (NO HTML FILENAMES)
+    // ==========================================
     const hasSearchButtonInNav = document.querySelector('nav a[href="store.html"]');
 
     if (hasSearchButtonInNav) {
@@ -641,5 +644,6 @@ document.addEventListener('DOMContentLoaded', function () {
         searchInput.addEventListener('input', function () {
             renderSearchResults(this.value);
         });
-    } 
+    }
+
 });
