@@ -191,3 +191,8 @@ p, span, small {
     border-width: 0 2.2px 2.2px 0;
     transform: rotate(45deg);
 }
+
+header:not(.hero-section),
+.page-header-bg {
+    background: url('../Header bg.png') center / cover no-repeat !important;
+}
