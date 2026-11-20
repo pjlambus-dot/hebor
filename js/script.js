@@ -423,5 +423,215 @@ document.addEventListener('DOMContentLoaded', function () {
             window.open(gmailUrl, '_blank');
         });
     }
+    
+    // ==========================================
+    // 9. LITERAL SITE-WIDE SEARCH BAR
+    // ==========================================
+    const hasSearchButtonInNav = document.querySelector('nav a[href="store.html"]');
 
+    if (hasSearchButtonInNav) {
+        const searchModal = document.createElement('div');
+        searchModal.id = 'heborSearchModal';
+        searchModal.setAttribute('role', 'dialog');
+        searchModal.setAttribute('aria-modal', 'true');
+        searchModal.setAttribute('aria-label', 'Search Hebor Website');
+        searchModal.innerHTML = `
+            <div class="hebor-search-card">
+                <div class="hebor-search-top">
+                    <input type="text" id="heborSearchInput" class="hebor-search-input" placeholder="Search shirts, history, team, contact, privacy policy, likes, bag..." autocomplete="off">
+                    <button type="button" id="heborSearchClose" class="hebor-search-close" aria-label="Close search">&times;</button>
+                </div>
+                <div id="heborSearchStatus" class="small text-secondary mb-2">Type a keyword from the Hebor website.</div>
+                <div id="heborSearchResults" class="hebor-search-results"></div>
+            </div>
+        `;
+        document.body.appendChild(searchModal);
+
+        const searchInput = document.getElementById('heborSearchInput');
+        const searchClose = document.getElementById('heborSearchClose');
+        const searchStatus = document.getElementById('heborSearchStatus');
+        const searchResults = document.getElementById('heborSearchResults');
+
+        function buildSiteIndex() {
+            const baseIndex = [
+                {
+                    page: 'Home',
+                    title: 'Welcome to Hebor',
+                    url: 'index.html',
+                    keywords: 'home welcome hebor emblem shop now store carousel'
+                },
+                {
+                    page: 'Store',
+                    title: "Don't Be Late Tee (PHP 500)",
+                    url: 'don_t_be_late_tee.html',
+                    keywords: "store shirt tee don't be late because time is gold php 500 small medium large"
+                },
+                {
+                    page: 'Store',
+                    title: 'Everyday Comfort tee (PHP 750)',
+                    url: 'everyday_comfort_tee.html',
+                    keywords: 'store shirt tee everyday comfort the shirt for you php 750 small medium large'
+                },
+                {
+                    page: 'Store',
+                    title: 'Do Good Work Tee (PHP 500)',
+                    url: 'do_good_work_tee.html',
+                    keywords: 'store shirt tee do good work being good is the new trend php 500 small medium large'
+                },
+                {
+                    page: 'About Us',
+                    title: 'History — Hebor in Hagonoy, Bulacan',
+                    url: 'about_us.html',
+                    keywords: 'about us history hagonoy bulacan chore gathering errand filipino fashion'
+                },
+                {
+                    page: 'About Us',
+                    title: 'People Behind Hebor',
+                    url: 'about_us.html',
+                    keywords: 'about us people behind hebor psalm lambus jan arelle layug nicole grace pantin juan miguel sotto team'
+                },
+                {
+                    page: 'Contact Us',
+                    title: 'Contact Us Form & Inquiry',
+                    url: 'contact_us.html',
+                    keywords: 'contact us form full name email address message submit inquiry'
+                },
+                {
+                    page: 'Privacy Policy',
+                    title: '1. Information We Collect',
+                    url: 'privacy_policy.html',
+                    keywords: 'privacy policy information we collect name email order specifications shirt size quantity messages'
+                },
+                {
+                    page: 'Privacy Policy',
+                    title: '2. How We Use Your Information & Email Transparency',
+                    url: 'privacy_policy.html',
+                    keywords: 'privacy policy how we use information email transparency full email copies logistics'
+                },
+                {
+                    page: 'Privacy Policy',
+                    title: '3. Data Confidentiality',
+                    url: 'privacy_policy.html',
+                    keywords: 'privacy policy data confidentiality personal data sell trade rent fulfillment'
+                },
+                {
+                    page: 'Shopping Bag',
+                    title: 'Shopping Bag & Bulk Checkout',
+                    url: 'shopping_bag.html',
+                    keywords: 'shopping bag cart quantity subtotal proceed to checkout bulk order'
+                },
+                {
+                    page: 'Likes',
+                    title: 'Liked Items',
+                    url: 'likes.html',
+                    keywords: 'likes liked items favorites heart view item remove'
+                }
+            ];
+
+            const savedLikes = JSON.parse(localStorage.getItem('heborLikes')) || [];
+            savedLikes.forEach((item) => {
+                if (item && item.name) {
+                    baseIndex.push({
+                        page: 'Likes',
+                        title: `Liked: ${item.name}`,
+                        url: 'likes.html',
+                        keywords: `likes liked item ${item.name} ${item.size || ''} php ${item.price || ''}`
+                    });
+                }
+            });
+
+            const savedBag = JSON.parse(localStorage.getItem('heborshopping bag')) || [];
+            savedBag.forEach((item) => {
+                if (item && item.name) {
+                    baseIndex.push({
+                        page: 'Shopping Bag',
+                        title: `In Bag: ${item.name} (${item.size || 'M'}) x${item.quantity || 1}`,
+                        url: 'shopping_bag.html',
+                        keywords: `shopping bag in bag ${item.name} ${item.size || ''} quantity ${item.quantity || 1}`
+                    });
+                }
+            });
+
+            return baseIndex;
+        }
+
+        function displayMatches(items) {
+            searchResults.innerHTML = items.map((entry) => `
+                <a href="${entry.url}" class="hebor-search-item">
+                    <span class="hebor-search-badge">${entry.page}</span>
+                    <div class="hebor-search-title">${entry.title}</div>
+                    <p class="hebor-search-snippet">Go to ${entry.url}</p>
+                </a>
+            `).join('');
+        }
+
+        function renderSearchResults(query) {
+            const trimmed = query.trim().toLowerCase();
+            const index = buildSiteIndex();
+
+            if (!trimmed) {
+                searchStatus.textContent = 'Showing all sections available across the Hebor website.';
+                displayMatches(index);
+                return;
+            }
+
+            const terms = trimmed.split(/\s+/).filter(Boolean);
+            const matches = index.filter((entry) => {
+                const haystack = `${entry.page} ${entry.title} ${entry.keywords}`.toLowerCase();
+                return terms.every((term) => haystack.includes(term));
+            });
+
+            if (matches.length === 0) {
+                searchStatus.textContent = `No results found for "${query}" in the website content.`;
+                searchResults.innerHTML = '';
+                return;
+            }
+
+            searchStatus.textContent = `${matches.length} result(s) found for "${query}".`;
+            displayMatches(matches);
+        }
+
+        function openSearchModal() {
+            searchModal.classList.add('active');
+            searchInput.value = '';
+            renderSearchResults('');
+            setTimeout(() => searchInput.focus(), 50);
+        }
+
+        function closeSearchModal() {
+            searchModal.classList.remove('active');
+        }
+
+        document.addEventListener('click', function (e) {
+            const clickedSearchLink = e.target.closest('nav a[href="store.html"]');
+            if (clickedSearchLink) {
+                e.preventDefault();
+                e.stopPropagation();
+                if (typeof e.stopImmediatePropagation === 'function') {
+                    e.stopImmediatePropagation();
+                }
+                openSearchModal();
+            }
+        }, true);
+
+        searchClose.addEventListener('click', closeSearchModal);
+
+        searchModal.addEventListener('click', function (e) {
+            if (e.target === searchModal) {
+                closeSearchModal();
+            }
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+                closeSearchModal();
+            }
+        });
+
+        searchInput.addEventListener('input', function () {
+            renderSearchResults(this.value);
+        });
+    }
+   
+    
 });
