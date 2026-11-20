@@ -320,20 +320,21 @@ nav a[href="store.html"][class*="btn"] span {
     color: #111111 !important;
 }
 
-nav a[href="shopping_bag.html"][class*="btn"],
-nav a[href="likes.html"][class*="btn"] {
+body nav.navbar a[href="shopping_bag.html"],
+body nav.navbar a[href="likes.html"] {
     background-color: #8f5400 !important;
     color: #ffffff !important;
     text-shadow: none !important;
 }
 
-nav a[href="shopping_bag.html"][class*="btn"] span,
-nav a[href="likes.html"][class*="btn"] span {
+body nav.navbar a[href="shopping_bag.html"] span,
+body nav.navbar a[href="likes.html"] span {
+    background-color: transparent !important;
     color: #ffffff !important;
 }
 
-nav a[href="shopping_bag.html"][class*="btn"] svg,
-nav a[href="likes.html"][class*="btn"] svg {
+body nav.navbar a[href="shopping_bag.html"] svg,
+body nav.navbar a[href="likes.html"] svg {
     fill: #ffffff !important;
 }
 
